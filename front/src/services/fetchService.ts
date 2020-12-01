@@ -1,4 +1,4 @@
-import { IBook } from "./../Interfaces.d";
+import { IAddress, IOrder } from "./../Interfaces.d";
 const baseUrl = "http://localhost:3001/api";
 
 const getAllBooks = async () => {
@@ -8,19 +8,19 @@ const getAllBooks = async () => {
 		: alert(`Http-error: ${response.statusText}`);
 };
 
-const postOrder = async (book: IBook) => {
+const postOrder = async (order: IOrder[], address: IAddress) => {
 	const options = {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json;charset=utf-8",
 		},
-		body: JSON.stringify(book),
+		body: JSON.stringify({ order, address }),
 	};
 
 	const response: Response = await fetch(`${baseUrl}/order`, options);
 	const result = await response.json();
 
-	console.log(`Zamówienie ${result}`);
+	console.log(`Order ${result}`);
 };
 
-export default { getAllBooks, postAll: postOrder };
+export default { getAllBooks, postOrder };

@@ -7,3 +7,16 @@ export interface IBook {
 	price: number;
 	currency: string;
 }
+
+export interface IOrder {
+	id: number;
+	quantity: number;
+}
+
+export interface IAddress {
+	firstName: string;
+	lastName: string;
+	city: string;
+	zipCode: string;
+
+}
