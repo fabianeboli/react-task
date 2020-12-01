@@ -16,10 +16,8 @@ const Main = () => {
 	return (
 		<div>
 			Books
-			
 			{books?.data.map((book: IBook) => (
 				<>
-				{console.log(book)}
 				<Book
 				key={book.id}
 				id={book.id}
