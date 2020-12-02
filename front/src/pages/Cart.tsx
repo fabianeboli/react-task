@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Book from "../components/Books/Book";
+import Book from "../components/Book/Book";
 import { IBook } from "../Interfaces";
 
 const Cart = () => {

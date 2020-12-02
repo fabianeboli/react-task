@@ -14,7 +14,13 @@ const postOrder = async (order: IOrder[], address: IAddress) => {
 		headers: {
 			"Content-Type": "application/json;charset=utf-8",
 		},
-		body: JSON.stringify({ order, address }),
+		body: JSON.stringify({
+			order,
+			first_name: address.firstName,
+			last_name: address.lastName,
+			city: address.city,
+			zip_code: address.zipCode,
+		}),
 	};
 
 	const response: Response = await fetch(`${baseUrl}/order`, options);

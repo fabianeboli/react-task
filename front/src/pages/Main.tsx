@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Book from "../components/Books/Book";
+import Book from "../components/Book/Book";
 import { IBook } from "../Interfaces";
 import fetchService from "../services/fetchService";
 import { Link } from "react-router-dom";
