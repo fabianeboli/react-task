@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IBook, IOrder } from "../../Interfaces";
 import { flushCart } from "../../reducers/cart";
 import fetchService from "../../services/fetchService";
+import "./OrderForm.sass";
 
 type MouseEvent = React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>;
 
@@ -36,22 +37,18 @@ const OrderForm = () => {
 
 		const zipCode = zipCodePrefix.concat("-", zipCodePostfix);
 
-		console.log(orders, { firstName, lastName, city, zipCode });
-
 		validate() &&
 			fetchService.postOrder(orders, {
 				firstName,
 				lastName,
 				zipCode,
 				city,
-			});
-		
-		emptyState();
+			}) && emptyState();
 	};
 
 	const validate = (): boolean => {
 		let isError: boolean = false;
-		const namePattern = /\w{2,}/i;
+		const namePattern = /[a-z-]{2,}/i;
 		const zipCodePattern = /\d{5}/;
 
 		if (
@@ -88,61 +85,80 @@ const OrderForm = () => {
 
 	return (
 		<div>
-			<ul>
-				{error.map((err: string) => (
-					<li>{err}</li>
-				))}
-			</ul>
+			{error.length > 0 && (
+				<ul className="Order__Error-Container">
+					{error.map((err: string) => (
+						<li>{err}</li>
+					))}
+				</ul>
+			)}
+
 			<form>
-				<input
-					type="text"
-					placeholder="Imię"
-					name="firstName"
-					minLength={2}
-					required
-					value={firstName}
-					onChange={({ target }) => setFirstName(target.value)}
-				/>
-				<input
-					type="text"
-					placeholder="Nazwisko"
-					name="lastName"
-					minLength={2}
-					required
-					value={lastName}
-					onChange={({ target }) => setLastName(target.value)}
-				/>
-				<input
-					type="text"
-					placeholder="Miejscowość"
-					name="city"
-					minLength={2}
-					required
-					value={city}
-					onChange={({ target }) => setCity(target.value)}
-				/>
-				<input
-					type="text"
-					placeholder="Kod Pocztowy"
-					name="zipCode"
-					minLength={2}
-					maxLength={2}
-					required
-					value={zipCodePrefix}
-					onChange={({ target }) => setZipCodePrefix(target.value)}
-				/>
-				-
-				<input
-					type="text"
-					placeholder="Kod Pocztowy"
-					name="zipCode"
-					minLength={3}
-					maxLength={3}
-					required
-					value={zipCodePostfix}
-					onChange={({ target }) => setZipCodePostFix(target.value)}
-				/>
-				<button onClick={(event) => handleOrder(event)}>Zamawiam i płacę</button>
+				<div className="Order__Container">
+					<input
+						className="Order__Container-InputName"
+						type="text"
+						placeholder="Imię"
+						name="firstName"
+						minLength={2}
+						required
+						value={firstName}
+						onChange={({ target }) => setFirstName(target.value)}
+					/>
+					<input
+						className="Order__Container-InputName"
+						type="text"
+						placeholder="Nazwisko"
+						name="lastName"
+						minLength={2}
+						required
+						value={lastName}
+						onChange={({ target }) => setLastName(target.value)}
+					/>
+					<input
+						className="Order__Container-InputName"
+						type="text"
+						placeholder="Miejscowość"
+						name="city"
+						minLength={2}
+						required
+						value={city}
+						onChange={({ target }) => setCity(target.value)}
+					/>
+					<div>
+						<input
+							className="Order__Container-InputName Order_Container-ZipCodePrefix"
+							type="text"
+							placeholder="00"
+							name="zipCode"
+							minLength={2}
+							maxLength={2}
+							required
+							value={zipCodePrefix}
+							onChange={({ target }) => setZipCodePrefix(target.value)}
+						/>
+						-
+						<input
+							className="Order__Container-InputName Order_Container-ZipCodePostfix"
+							type="text"
+							placeholder="Kod Pocztowy"
+							name="zipCode"
+							minLength={3}
+							maxLength={3}
+							required
+							value={zipCodePostfix}
+							onChange={({ target }) => setZipCodePostFix(target.value)}
+						/>
+					</div>
+				</div>
+
+				<button
+					className="Order_Container-SubmitButton"
+					type="submit"
+					onClick={(event) => handleOrder(event)}
+				>
+					Zamawiam i płacę
+				</button>
 			</form>
 		</div>
 	);

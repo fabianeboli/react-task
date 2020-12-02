@@ -18,5 +18,12 @@ export interface IAddress {
 	lastName: string;
 	city: string;
 	zipCode: string;
+}
 
+export interface INavbar {
+	pageName: string;
+}
+
+export interface IisInCartPage {
+	isInCartPage: boolean
 }

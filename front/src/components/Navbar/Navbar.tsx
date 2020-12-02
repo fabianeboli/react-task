@@ -1,9 +1,12 @@
 import React from "react";
+import { INavbar } from "../../Interfaces";
+import "./Navbar.sass"
 
-const Navbar = (pageName: string) => {
+
+const Navbar = ({ pageName }: INavbar) => {
 	return (
-		<div className="container">
-			<h2>{pageName}</h2>
+		<div className="Navbar__container ">
+			<h6 className="Navbar__container-text">{pageName}</h6>
 		</div>
 	);
 };
